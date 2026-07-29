@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>OBS Afterglow | Teacher Dashboard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body class="dashboard-page">
+  <header class="dash-topbar">
+    <a class="brand light" href="index.html">
+      <span class="brand-mark">△</span>
+      <span><strong>OBS Afterglow</strong><small>Teacher Dashboard</small></span>
+    </a>
+    <div class="dash-actions">
+      <select id="classFilter" aria-label="Filter by class"><option value="">All classes</option></select>
+      <button class="ghost-btn light-btn" id="refreshBtn">Refresh</button>
+      <button class="primary-btn compact" id="presentBtn">Show Class</button>
+    </div>
+  </header>
+
+  <main class="dashboard-shell">
+    <section class="dash-hero dashboard-photo-hero">
+      <div class="dash-hero-copy"><span class="eyebrow">LIVE CLASS REFLECTION</span><h1>See the class journey unfold.</h1><p>Turn individual experiences into a shared picture of resilience, growth and commitment.</p></div>
+      <div class="dash-photo"><div class="status-pill"><span id="connectionDot"></span><b id="connectionText">Demo data</b></div></div>
+    </section>
+
+    <section class="metric-grid">
+      <article class="metric-card"><small>Total responses</small><strong id="totalResponses">0</strong><span>submitted reflections</span></article>
+      <article class="metric-card"><small>High moments</small><strong id="highCount">0</strong><span>positive turning points</span></article>
+      <article class="metric-card"><small>Low moments</small><strong id="lowCount">0</strong><span>challenging experiences</span></article>
+      <article class="metric-card"><small>Most common strength</small><strong id="topStrength">—</strong><span>class growth theme</span></article>
+    </section>
+
+    <section class="dashboard-grid">
+      <article class="panel span-2">
+        <div class="panel-head">
+          <div><small>CLASS PULSE</small><h2>Commitment areas</h2></div>
+        </div>
+        <div class="bar-chart" id="commitmentChart"></div>
+      </article>
+
+      <article class="panel">
+        <div class="panel-head">
+          <div><small>QUICK VIEW</small><h2>Moment mix</h2></div>
+        </div>
+        <div class="donut-wrap">
+          <div class="donut" id="momentDonut"><span id="donutValue">0</span><small>responses</small></div>
+          <div id="momentLegend" class="legend"></div>
+        </div>
+      </article>
+
+      <article class="panel span-3">
+        <div class="panel-head">
+          <div><small>COLLECTIVE VOICE</small><h2>Word cloud</h2></div>
+          <select id="cloudQuestion">
+            <option value="feelings">How did OBS make us feel?</option>
+            <option value="strength">What strengths did we discover?</option>
+            <option value="learning">What did we learn?</option>
+            <option value="commitment">What are we committing to?</option>
+            <option value="iAm">I Am...</option>
+            <option value="iCan">I Can...</option>
+            <option value="iHave">I Have...</option>
+          </select>
+        </div>
+        <div class="word-cloud" id="wordCloud"></div>
+      </article>
+
+      <article class="panel span-3">
+        <div class="panel-head">
+          <div><small>TEACHER MODERATION</small><h2>Responses</h2></div>
+          <div class="segmented">
+            <button class="active" data-filter="all">All</button>
+            <button data-filter="approved">Approved</button>
+            <button data-filter="hidden">Hidden</button>
+            <button data-filter="favourite">Favourites</button>
+          </div>
+        </div>
+        <div class="response-table-wrap">
+          <table class="response-table">
+            <thead><tr><th>Student</th><th>Class</th><th>Strength</th><th>Commitment</th><th>Status</th><th>Actions</th></tr></thead>
+            <tbody id="responseRows"></tbody>
+          </table>
+        </div>
+      </article>
+    </section>
+  </main>
+
+  <div class="presentation hidden" id="presentation">
+    <div class="presentation-toolbar">
+      <div>
+        <small>CLASS PRESENTATION MODE</small>
+        <select id="presentationQuestion"></select>
+      </div>
+      <div class="present-actions">
+        <button id="wallBtn">Reflection Wall</button>
+        <button id="cloudBtn">Word Cloud</button>
+        <button id="randomBtn" class="active">Random Answer</button>
+        <button id="closePresentBtn">✕ Exit</button>
+      </div>
+    </div>
+
+    <div class="presentation-stage">
+      <div class="present-title">
+        <span id="presentCategory">REFLECTION QUESTION</span>
+        <h2 id="presentQuestionText"></h2>
+      </div>
+
+      <div id="randomView" class="present-view active">
+        <article class="quote-card">
+          <span class="quote-mark">“</span>
+          <p id="randomAnswer">Choose a question and reveal a class reflection.</p>
+          <small id="answerLabel">Anonymous reflection</small>
+        </article>
+        <button class="reveal-btn" id="revealBtn">Reveal a Reflection</button>
+      </div>
+
+      <div id="wallView" class="present-view">
+        <div class="sticky-wall" id="stickyWall"></div>
+      </div>
+
+      <div id="cloudView" class="present-view">
+        <div class="word-cloud presentation-cloud" id="presentationCloud"></div>
+      </div>
+    </div>
+  </div>
+
+  <script src="config.js"></script>
+  <script src="dashboard.js"></script>
+</body>
+</html>
